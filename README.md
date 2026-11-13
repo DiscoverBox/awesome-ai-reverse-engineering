@@ -45,6 +45,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 - [浏览器自动化与流量分析](#浏览器自动化与流量分析)
 - [基础逆向工具（非 AI）](#基础逆向工具非-ai)
 - [观察中项目](#观察中项目)
+- [旧版兼容参考](#旧版兼容参考)
 - [相关资源与验证案例](#相关资源与验证案例)
 - [工具评估维度](#工具评估维度)
 - [使用规范](#使用规范)
@@ -61,9 +62,9 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 证据采样与本地复现准备 | [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp)（源码/网络导出） |
 | 反检测浏览器环境                        | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp)               |
 | IDA 9.4+ 的 GUI 与无头 AI 分析       | [Hex-Rays IDA MCP](https://github.com/HexRaysSA/ida-mcp)                     |
-| IDA 8.3–9.3 的第三方 MCP 兼容入口    | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp)                       |
+| 通过 idalib 使用第三方 IDA MCP | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp)（使用 `idalib-mcp`；新环境优先官方实现） |
 | IDA 文件导出后交给 AI 分析               | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP)                        |
-| 无头 IDA 服务                       | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs)                        |
+| 无头 IDA 服务 | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs)（v9.5.x 对应 IDA 9.5；旧版 IDA 需匹配版本） |
 | 多个 IDA 实例并行分析                  | [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp)                 |
 | IDA 内直接使用多种 AI 模型 | [Gepetto](https://github.com/JusticeRage/Gepetto)（需 IDA/Hex-Rays；支持本地模型） |
 | Ghidra GUI 与无头 AI 分析          | [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp)                 |
@@ -106,7 +107,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [jshookmcp](https://github.com/vmoranv/jshookmcp) | MCP | 综合型 AI JS 安全分析平台 | 浏览器自动化、CDP、网络监控、JS Hook、WASM、Source Map、AST 变换 | A search-first, profile-aware reverse-engineering workspace for AI agents — 735 tools across 36 domains in one MCP server. | 是 · 2026-11-13 | [v0.4.3](https://github.com/vmoranv/jshookmcp/releases/tag/v0.4.3) · 2026-10-30 | 2112 |
-| [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp) | MCP | 面向真实浏览器运行时的 JS 调试工具 | 请求参数、动态 Cookie、WebSocket、调用链和关键函数定位 | AI Agent-first JS 逆向 MCP Server：有头 Chrome 调试、断点、网络/WebSocket 分析、Patchright 反检测，可选 CloakBrowser。 | 是 · 2026-09-03 | [v4.0.5](https://github.com/zhizhuodemao/js-reverse-mcp/releases/tag/v4.0.5) · 2026-09-03 | 3070 |
+| [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp) | MCP | 面向真实浏览器运行时的 JS 调试工具 | 请求参数、动态 Cookie、WebSocket、调用链和关键函数定位 | AI Agent-first JS 逆向 MCP Server：有头 Chrome 调试、断点、网络/WebSocket 分析、Patchright 反检测，可选 CloakBrowser。 | 是 · 2026-09-03 | [v4.0.5](https://github.com/zhizhuodemao/js-reverse-mcp/releases/tag/v4.0.5) · 2026-09-03 | 3071 |
 | [JSReverser-MCP](https://github.com/NoOne-hub/JSReverser-MCP) | MCP / 工作流 | 标准化 Web 逆向流程 | 页面观察、运行时采样、本地复现、补环境和证据沉淀 | JSReverser-MCP 是一个面向 JavaScript 逆向分析的 MCP 工具，专门用于帮助开发者在真实浏览器环境中高效定位前端核心逻辑。它 将脚本检索、断点调试、函数 Hook、网络请求追踪、调用链分析、混淆还原和风险评估整合为统一能力，可直接接入 Claude、 Codex、Cursor 等支持 MCP 的客户端。你可以连接已开启的 Chrome，在登录态页面下持续采样请求参数与返回数据，快速定位签名、 加密、鉴权和关键业务流程。工具同时支持自动化页面操作与结构化报告导出，适合用于接口分析、安全研究、前端调试与工程排障等 场景 | 否 · 2026-05-31 | [v2.0.4](https://github.com/NoOne-hub/JSReverser-MCP/releases/tag/v2.0.4) · 2026-05-31 | 1049 |
 
 ### JS 逆向 Skill
@@ -121,18 +122,20 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) | 定制浏览器 / Agent | 引擎级 JS、JSVMP 和 WASM 追踪 | 高级混淆、动态代码和底层执行轨迹分析 | 🦊 内置 AI 逆向 Agent 的 Firefox — 通用 JS/JSVMP/WASM/签名逆向工作站，SpiderMonkey 引擎层非侵入 trace，把加密参数从黑盒还原成不依赖浏览器的纯算法 | 是 · 2026-11-12 | [v0.27.2](https://github.com/WhiteNightShadow/firefox-reverse/releases/tag/v0.27.2) · 2026-11-09 | 988 |
+| [Firefox-Reverse](https://github.com/WhiteNightShadow/firefox-reverse) | 定制浏览器 / Agent | 引擎级 JS、JSVMP 和 WASM 追踪 | 高级混淆、动态代码和底层执行轨迹分析 | 🦊 内置 AI 逆向 Agent 的 Firefox — 通用 JS/JSVMP/WASM/签名逆向工作站，SpiderMonkey 引擎层非侵入 trace，把加密参数从黑盒还原成不依赖浏览器的纯算法 | 是 · 2026-11-12 | [v0.27.2](https://github.com/WhiteNightShadow/firefox-reverse/releases/tag/v0.27.2) · 2026-11-09 | 989 |
 
 ## IDA Pro 生态
 
 > IDA Pro 的 MCP 服务、数据导出工具、内置 AI 插件以及多实例分析接口。
 
+> [IDA Pro MCP 上游](https://github.com/mrexodia/ida-pro-mcp#installation-gui)已推荐 Hex-Rays 官方实现，并计划弃用旧 GUI MCP 插件；继续使用该项目时，上游建议改用 `idalib-mcp`。官方实现要求 IDA 9.4+、idalib 和 Python 3.11+；旧版 IDA 的兼容性应按具体发布版与安装方式核对。[ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs#install) 的版本与 IDA 对应，v9.5.x 需要正式版 IDA 9.5，不能直接套用到旧版或 9.5 beta。
+
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Hex-Rays IDA MCP](https://github.com/HexRaysSA/ida-mcp) | IDA 插件 / MCP | 原厂 Code Mode 与数据库协调接口 | IDAPython 分析、GUI 与无头共享数据库、多数据库和多 Agent 协作 | Official Hex-Rays IDA MCP Server. | 是 · 2026-10-28 | [v20261028.0.3](https://github.com/HexRaysSA/ida-mcp/releases/tag/v20261028.0.3) · 2026-10-28 | 1608 |
-| [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) | IDA 插件 / MCP | AI 直接读取和操作 IDA Pro | 反编译、交叉引用、重命名、注释和类型恢复 | AI-powered reverse engineering assistant that bridges IDA Pro with language models through MCP. | 是 · 2026-11-12 | [1.4.0](https://github.com/mrexodia/ida-pro-mcp/releases/tag/1.4.0) · 2025-10-06 | 13459 |
+| [Hex-Rays IDA MCP](https://github.com/HexRaysSA/ida-mcp) | IDA 插件 / MCP | 原厂 Code Mode 与数据库协调接口 | IDAPython 分析、GUI 与无头共享数据库、多数据库和多 Agent 协作 | Official Hex-Rays IDA MCP Server. | 是 · 2026-10-28 | [v20261028.0.3](https://github.com/HexRaysSA/ida-mcp/releases/tag/v20261028.0.3) · 2026-10-28 | 1611 |
+| [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) | MCP / idalib | AI 直接读取和操作 IDA Pro | 使用 `idalib-mcp` 进行反编译、交叉引用与符号整理；旧 GUI 插件不再推荐 | AI-powered reverse engineering assistant that bridges IDA Pro with language models through MCP. | 是 · 2026-11-12 | [1.4.0](https://github.com/mrexodia/ida-pro-mcp/releases/tag/1.4.0) · 2025-10-06 | 13460 |
 | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) | IDA 插件 / 导出工具 | 将 IDA 数据导出后交给 AI IDE 分析 | 大规模代码索引、低交互成本分析 | Say goodbye to the complex, verbose, and laggy interaction mode of IDA Pro MCP | 否 · 2026-07-26 | 暂无 | 2075 |
-| [Gepetto](https://github.com/JusticeRage/Gepetto) | IDA AI 插件 | IDA 内多模型函数分析 | 函数解释、重命名与本地或云端模型辅助 | IDA plugin which queries language models to speed up reverse-engineering | 是 · 2026-08-15 | [v1.5.1](https://github.com/JusticeRage/Gepetto/releases/tag/v1.5.1) · 2025-11-19 | 3485 |
+| [Gepetto](https://github.com/JusticeRage/Gepetto) | IDA AI 插件 | IDA 内多模型函数分析 | 函数解释、重命名与本地或云端模型辅助 | IDA plugin which queries language models to speed up reverse-engineering | 是 · 2026-08-15 | [v1.5.1](https://github.com/JusticeRage/Gepetto/releases/tag/v1.5.1) · 2025-11-19 | 3486 |
 | [WPeGPT](https://github.com/WPeace-HcH/WPeGPT) | IDA AI 插件 | 将多种 AI 模型直接嵌入 IDA | 使用 OpenAI、DeepSeek 等模型进行交互式二进制分析 | An IDA plugin for binary file analysis, powered by AI models such as OpenAI and DeepSeek. | 否 · 2026-05-27 | [v3.0](https://github.com/WPeace-HcH/WPeGPT/releases/tag/v3.0) · 2026-05-27 | 1424 |
 | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) | MCP | Rust 实现的无头 IDA 服务 | 服务端部署、自动化流水线 | Headless IDA Pro MCP Server | 是 · 2026-11-01 | [v9.5.0](https://github.com/blacktop/ida-mcp-rs/releases/tag/v9.5.0) · 2026-11-01 | 904 |
 | [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp) | IDA 插件 / MCP | 通过单个端点管理多个 IDA 实例 | 多二进制并行分析、跨样本函数相似性搜索和恶意软件组件关联 | Multi-instance IDA Pro MCP server — analyze multiple binaries simultaneously through a single MCP endpoint. | 是 · 2026-09-19 | 暂无 | 472 |
@@ -143,8 +146,8 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp) | Ghidra 插件 / MCP | 综合型 Ghidra MCP 服务 | GUI 与无头分析、批量操作、P-code、调试器和团队协作 | Ghidra MCP Server — 200+ MCP tools for AI-powered reverse engineering. GUI plugin + headless server, lazy tool loading, convention enforcement, batch operations, Ghidra Server integration, and Docker deployment. | 是 · 2026-11-08 | [v7.0.0](https://github.com/bethington/ghidra-mcp/releases/tag/v7.0.0) · 2026-10-21 | 6211 |
-| [auto-re-agent](https://github.com/Dryxio/reagent) | Agent / Ghidra 后端 | 自动重建并验证二进制中的 C/C++ 函数 | 反编译证据收集、候选源码生成、构建测试和一致性检查 | Reconstruct and validate C/C++ code from compiled programs with AI. | 是 · 2026-09-09 | [v0.4.0](https://github.com/Dryxio/reagent/releases/tag/v0.4.0) · 2026-09-09 | 2433 |
+| [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp) | Ghidra 插件 / MCP | 综合型 Ghidra MCP 服务 | GUI 与无头分析、批量操作、P-code、调试器和团队协作 | Ghidra MCP Server — 200+ MCP tools for AI-powered reverse engineering. GUI plugin + headless server, lazy tool loading, convention enforcement, batch operations, Ghidra Server integration, and Docker deployment. | 是 · 2026-11-08 | [v7.0.0](https://github.com/bethington/ghidra-mcp/releases/tag/v7.0.0) · 2026-10-21 | 6212 |
+| [auto-re-agent](https://github.com/Dryxio/reagent) | Agent / Ghidra 后端 | 自动重建并验证二进制中的 C/C++ 函数 | 反编译证据收集、候选源码生成、构建测试和一致性检查 | Reconstruct and validate C/C++ code from compiled programs with AI. | 是 · 2026-09-09 | [v0.4.0](https://github.com/Dryxio/reagent/releases/tag/v0.4.0) · 2026-09-09 | 2434 |
 | [reverse-engineering-assistant](https://github.com/cyberkaida/reverse-engineering-assistant) | Ghidra 插件 / MCP | Ghidra 逆向任务接口 | 反编译、函数与数据类型分析、重命名和注释 | MCP server for reverse engineering tasks in Ghidra 👩‍💻 | 是 · 2026-11-03 | [v7.3.2](https://github.com/cyberkaida/reverse-engineering-assistant/releases/tag/v7.3.2) · 2026-11-13 | 958 |
 | [GhidrAssistMCP](https://github.com/symgraph/GhidrAssistMCP) | Ghidra 原生扩展 / MCP | Ghidra 内置 MCP 服务 | 原生界面中的实时二进制分析和 Agent 工具调用 | An native MCP server extension for Ghidra | 是 · 2026-10-09 | [3.0.0](https://github.com/symgraph/GhidrAssistMCP/releases/tag/3.0.0) · 2026-10-09 | 810 |
 | [GhidraGPT](https://github.com/weirdmachine64/GhidraGPT) | Ghidra AI 插件 | 将多种 LLM 直接集成到 Ghidra | 对话式函数解释、符号命名和 AI 辅助分析 | Integrate LLM models directly into Ghidra for AI-enhanced reverse engineering. | 否 · 2026-07-22 | [v1.4.0](https://github.com/weirdmachine64/GhidraGPT/releases/tag/v1.4.0) · 2026-07-22 | 842 |
@@ -187,16 +190,15 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Rikugan](https://github.com/buzzer-re/Rikugan) | Agent / 插件 | 嵌入 IDA 和 Binary Ninja 的 AI Agent | 在逆向界面中进行连续对话式分析 | A reverse-engineering agent for IDA Pro and Binary Ninja | 是 · 2026-11-04 | [v1.4.0](https://github.com/buzzer-re/Rikugan/releases/tag/v1.4.0) · 2026-09-25 | 710 |
-| [Binary Ninja MCP](https://github.com/fosdickio/binary_ninja_mcp) | Binary Ninja 插件 / MCP | Binary Ninja AI 桥接 | 多目标二进制实时分析 | A Binary Ninja plugin containing an MCP server that enables seamless integration with your favorite LLM/MCP client. | 否 · 2026-04-05 | [v1.2.1](https://github.com/fosdickio/binary_ninja_mcp/releases/tag/v1.2.1) · 2026-03-22 | 459 |
 
 ## 通用 Agent、平台与知识库
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Skill / Router | 安全任务和工具链路由 | 多工具编排、CTF、安全研究和报告生成 | Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 &#124; 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端 | 是 · 2026-09-22 | [v1.0.1](https://github.com/zhaoxuya520/reverse-skill/releases/tag/v1.0.1) · 2026-08-08 | 44593 |
+| [reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Skill / Router | 安全任务和工具链路由 | 多工具编排、CTF、安全研究和报告生成 | Reverse Engineering / Authorized Penetration Testing / Security Research Skill Router Pack AI-powered routing + On-demand toolchain bootstrapping + Self-evolving knowledge base Supports Claude Code, Kiro, Cursor, Cline, and other AI coding clients 逆向/渗透/安全技能路由包 - AI 自动路由 + 按需自举工具链 + 自动进化经验库 &#124; 支持 Claude Code / Kiro / Cursor / Cline 等代码 AI 客户端 | 是 · 2026-09-22 | [v1.0.1](https://github.com/zhaoxuya520/reverse-skill/releases/tag/v1.0.1) · 2026-08-08 | 44596 |
 | [HexGraph](https://github.com/branover/hexgraph) | 本地工作站 / Agent / MCP | 二进制与固件漏洞研究工作站 | 反编译、模糊测试、验证、证据图谱和研究记录 | Self-hosted, agentic vulnerability research for binaries & firmware: an AI agent decompiles, fuzzes, and verifies exploits inside a sandbox, recording every finding to a typed graph. BYOK, fully local. | 是 · 2026-08-15 | [hexgraph-v0.9.0](https://github.com/branover/hexgraph/releases/tag/hexgraph-v0.9.0) · 2026-07-07 | 21 |
 | [revula](https://github.com/president-xd/revula) | MCP 平台 | 通用逆向工程自动化后端 | 静态分析、动态调试、恶意软件和批量处理 | A fully functional and production-grade reverse engineering MCP Server | 是 · 2026-08-16 | 暂无 | 85 |
-| [REA](https://github.com/morluto/rea) | Agent / CLI / MCP / Skill | 跨应用与二进制的本地逆向调查平台 | 原生、JS/Electron、.NET、应用行为调查、结构化证据与跨版本比较 | Reverse engineer anything with agents, from app behavior down to native binaries. | 是 · 2026-11-13 | [rea-agents-6.9.0](https://github.com/morluto/rea/releases/tag/rea-agents-6.9.0) · 2026-11-12 | 456241 |
+| [REA](https://github.com/morluto/rea) | Agent / CLI / MCP / Skill | 跨应用与二进制的本地逆向调查平台 | 原生、JS/Electron、.NET、应用行为调查、结构化证据与跨版本比较 | Reverse engineer anything with agents, from app behavior down to native binaries. | 是 · 2026-11-13 | [rea-agents-6.9.0](https://github.com/morluto/rea/releases/tag/rea-agents-6.9.0) · 2026-11-12 | 456502 |
 | [Reversecore MCP](https://github.com/sjkim1127/Reversecore_MCP) | MCP 平台 | 多工具安全与逆向分析接口 | radare2、YARA、LIEF、CAPA、angr、Volatility 等工具的编排与报告 | A security-first MCP server that empowers AI agents to perform automated reverse engineering, malware analysis, forensics, vulnerability research, and SAST — powered by Radare2, YARA, LIEF, Capstone, and more. | 是 · 2026-11-13 | [v3.1.0](https://github.com/sjkim1127/Reversecore_MCP/releases/tag/v3.1.0) · 2026-11-11 | 221 |
 
 ## Android 与 iOS 安全分析
@@ -207,7 +209,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) | Skill | Android 静态分析与 API 提取 | APK、XAPK、JAR、AAR、Retrofit、OkHttp 和调用链分析 | Claude Code skill to support Android app's reverse engineering | 是 · 2026-10-11 | [v1.1.0](https://github.com/SimoneAvogadro/android-reverse-engineering-skill/releases/tag/v1.1.0) · 2026-04-27 | 8713 |
+| [Android Reverse Engineering Skill](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) | Skill | Android 静态分析与 API 提取 | APK、XAPK、JAR、AAR、Retrofit、OkHttp 和调用链分析 | Claude Code skill to support Android app's reverse engineering | 是 · 2026-10-11 | [v1.1.0](https://github.com/SimoneAvogadro/android-reverse-engineering-skill/releases/tag/v1.1.0) · 2026-04-27 | 8714 |
 | [jadx-headless-mcp](https://github.com/1013503897/jadx-headless-mcp) | JVM / MCP | 无 GUI 的 JADX 静态分析接口 | APK/DEX 分析、源码分页、交叉引用和资源检索 | Headless MCP server for Android APK static analysis, built directly on jadx-core. No JADX GUI required. | 是 · 2026-10-30 | [v0.8.0](https://github.com/1013503897/jadx-headless-mcp/releases/tag/v0.8.0) · 2026-10-19 | 169 |
 | [JADX-AI-MCP](https://github.com/zinja-coder/jadx-ai-mcp) | JADX 插件 / MCP | JADX 内实时 AI 分析 | APK 代码阅读、漏洞分析和上下文审查 | Plugin for JADX to integrate MCP server | 是 · 2026-10-19 | [v6.5.0](https://github.com/zinja-coder/jadx-ai-mcp/releases/tag/v6.5.0) · 2026-10-19 | 3007 |
 | [apktool-mcp-server](https://github.com/zinja-coder/apktool-mcp-server) | Apktool / MCP | 通过 AI 操作 Apktool 的解包与重建能力 | Manifest、资源和 Smali 分析，APK 解包、修改与重新构建 | A MCP Server for APK Tool (Part of Android Reverse Engineering MCP Suites) | 否 · 2026-07-02 | [V3.0.2](https://github.com/zinja-coder/apktool-mcp-server/releases/tag/V3.0.2) · 2026-07-02 | 710 |
@@ -217,7 +219,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [FIRERPA](https://github.com/firerpa/lamda) | Android 平台 / MCP / Agent | Android 全栈设备控制与动态分析 | 多设备远程控制、UI/OCR 自动化、MITM、Frida、代理网络和长期任务 | Android Full-Stack Device Control Platform: WebRTC/H.264 remote desktop, UI/OCR/image-matching automation, one-click MITM, built-in Frida, proxy/VPN/frp/P2P networking, MCP/Agent, 160+ APIs, designed for multi-device clusters and engineered deployments. | 是 · 2026-09-27 | [v10.9](https://github.com/firerpa/lamda/releases/tag/v10.9) · 2026-09-27 | 8728 |
+| [FIRERPA](https://github.com/firerpa/lamda) | Android 平台 / MCP / Agent | Android 全栈设备控制与动态分析 | 多设备远程控制、UI/OCR 自动化、MITM、Frida、代理网络和长期任务 | Android Full-Stack Device Control Platform: WebRTC/H.264 remote desktop, UI/OCR/image-matching automation, one-click MITM, built-in Frida, proxy/VPN/frp/P2P networking, MCP/Agent, 160+ APIs, designed for multi-device clusters and engineered deployments. | 是 · 2026-09-27 | [v10.9](https://github.com/firerpa/lamda/releases/tag/v10.9) · 2026-09-27 | 8729 |
 | [frida-analykit](https://github.com/ZSA233/frida-analykit) | Frida 工具包 / MCP | 面向 Android Agent 的动态插桩接口 | Frida 版本管理、底层工具封装、Hook 和运行时分析 | Frida 工具包 - 主要面向安卓端逆向，解决frida环境版本管理和对Agent端常用底层工具方法封装，支持MCP。（目前主要由AI开发维护代码） | 否 · 2026-05-16 | [v2.1.4](https://github.com/ZSA233/frida-analykit/releases/tag/v2.1.4) · 2026-05-14 | 157 |
 | [iOS MCP](https://github.com/witchan/ios-mcp) | MCP | 越狱 iOS 设备控制 | 应用、文件、日志、HID 和辅助功能操作 | 让 Claude、Codex、Cursor 等 AI 助手看懂 iPhone 屏幕并直接操作手机的 iOS 自动化工具与 MCP Server，支持 UI 树获取、元素定位、截图与 OCR 识别、点击滑动、文字输入、应用管理和日志读取，适用于自动化测试与 iOS 逆向调试 | 是 · 2026-09-27 | [v1.2.8](https://github.com/witchan/ios-mcp/releases/tag/v1.2.8) · 2026-09-27 | 691 |
 
@@ -227,7 +229,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer) | Agent / CLI | 将网站实际调用的端点生成类型化 API 客户端 | 浏览器流量捕获、接口发现、HAR 分析和 Python/JS/TS 客户端生成 | Reverse engineer any website into a typed API client. Works with Claude Code, Codex, Cursor and OpenCode. | 是 · 2026-11-11 | [v0.15.0](https://github.com/kalil0321/reverse-api-engineer/releases/tag/v0.15.0) · 2026-11-09 | 3539 |
+| [reverse-api-engineer](https://github.com/kalil0321/reverse-api-engineer) | Agent / CLI | 将网站实际调用的端点生成类型化 API 客户端 | 浏览器流量捕获、接口发现、HAR 分析和 Python/JS/TS 客户端生成 | Reverse engineer any website into a typed API client. Works with Claude Code, Codex, Cursor and OpenCode. | 是 · 2026-11-11 | [v0.15.0](https://github.com/kalil0321/reverse-api-engineer/releases/tag/v0.15.0) · 2026-11-09 | 3545 |
 | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp) | MCP | 反检测和隐私浏览器自动化 | 指纹控制、代理、多会话隔离和真实浏览器环境 | 暂无简介 | 是 · 2026-10-04 | [v2.6.0](https://github.com/whit3rabbit/camoufox-mcp/releases/tag/v2.6.0) · 2026-10-03 | 54 |
 | [mitmproxy-mcp](https://github.com/snapspecter/mitmproxy-mcp) | mitmproxy / MCP | AI 驱动的 HTTP/HTTPS 流量操作 | 流量检索、拦截、修改、重放、认证识别和接口结构提取 | MCP Server that wraps mitmproxy and exposes it as a tool to any MCP client, allows your AI agents to inspect traffic, filter traffic, intercept & modify traffic, request reply, set global headers, and start/stop mitmproxy as needed. | 是 · 2026-11-06 | [v0.8.0](https://github.com/snapspecter/mitmproxy-mcp/releases/tag/v0.8.0) · 2026-11-06 | 136 |
 | [CipherBridge](https://github.com/CuriousLearnerDev/CipherBridge) | 桌面工作站 / AI Agent | AI 辅助的 APP/Web 加解密逆向与流量桥接 | 浏览器 Hook、小程序源码分析、加解密参数还原、Burp 双向加解密桥接和 mitmdump 插件生成 | 面向APP/Web 加解密逆向分析、渗透测试人员的可视化解密框架 | 是 · 2026-10-09 | [6.0](https://github.com/CuriousLearnerDev/CipherBridge/releases/tag/6.0) · 2026-10-08 | 464 |
@@ -239,16 +241,16 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Ghidra](https://github.com/NationalSecurityAgency/ghidra) | 反编译器 / 分析框架 | 跨平台原生二进制静态分析 | 反汇编、反编译、类型恢复、脚本与无头分析 | Ghidra is a software reverse engineering (SRE) framework | 是 · 2026-11-10 | [Ghidra_12.2_build](https://github.com/NationalSecurityAgency/ghidra/releases/tag/Ghidra_12.2_build) · 2026-10-22 | 99866 |
-| [jadx](https://github.com/skylot/jadx) | Android 反编译器 | DEX 到 Java 的代码还原 | APK/DEX 代码阅读、交叉引用、资源与 GUI/CLI 分析 | Dex to Java decompiler | 是 · 2026-11-11 | [v1.5.6](https://github.com/skylot/jadx/releases/tag/v1.5.6) · 2026-07-10 | 51795 |
-| [Apktool](https://github.com/iBotPeaches/Apktool) | APK 解包 / 重建工具 | Android 资源与 Smali 解码和重建 | Manifest、资源、Smali 检查与修改后的 APK 重建 | A tool for reverse engineering Android apk files | 是 · 2026-10-28 | [v3.0.3](https://github.com/iBotPeaches/Apktool/releases/tag/v3.0.3) · 2026-07-20 | 27186 |
-| [Frida](https://github.com/frida/frida) | 动态插桩工具包 | 跨平台运行时观测与 Hook | 应用运行时行为分析、函数追踪和自定义插桩脚本 | Main repo for hosting release binaries | 是 · 2026-11-13 | [17.26.2](https://github.com/frida/frida/releases/tag/17.26.2) · 2026-11-07 | 22769 |
-| [ILSpy](https://github.com/icsharpcode/ILSpy) | .NET 反编译器 | 托管程序集浏览与 C# 反编译 | 类型和方法检索、元数据检查、源码导出与 CLI 分析 | .NET Decompiler with support for PDB generation, ReadyToRun, Metadata (&more) - cross-platform! | 是 · 2026-11-11 | [v11.2](https://github.com/icsharpcode/ILSpy/releases/tag/v11.2) · 2026-10-27 | 27053 |
-| [radare2](https://github.com/radareorg/radare2) | CLI / 分析框架 | 终端中的跨平台二进制分析 | 反汇编、反编译、调试、脚本和自动化分析 | UNIX-like reverse engineering framework and command-line toolset | 是 · 2026-11-13 | [6.2.6](https://github.com/radareorg/radare2/releases/tag/6.2.6) · 2026-11-05 | 25417 |
-| [x64dbg](https://github.com/x64dbg/x64dbg) | Windows 调试器 | Windows 用户态动态调试 | x64/x86 程序的断点、寄存器、内存和执行追踪 | An open-source user mode debugger for Windows. Optimized for reverse engineering and malware analysis. | 是 · 2026-11-09 | [2026.05.27](https://github.com/x64dbg/x64dbg/releases/tag/2026.05.27) · 2026-05-27 | 50293 |
-| [angr](https://github.com/angr/angr) | 二进制分析 / 符号执行框架 | 程序状态与路径约束分析 | 控制流恢复、符号执行、路径探索和约束求解 | A powerful and user-friendly binary analysis platform! | 是 · 2026-11-13 | 暂无 | 9371 |
-| [mitmproxy](https://github.com/mitmproxy/mitmproxy) | HTTP/HTTPS 代理 | 可交互和脚本化的流量分析 | 请求与响应检查、修改、重放和 Python 插件 | An interactive TLS-capable intercepting HTTP proxy for penetration testers and software developers. | 是 · 2026-11-10 | [v12.3.1](https://github.com/mitmproxy/mitmproxy/releases/tag/v12.3.1) · 2026-10-25 | 46872 |
-| [Rizin](https://github.com/rizinorg/rizin) | CLI / 分析框架 | 基于 radare2 分支发展的二进制分析框架 | 反汇编、分析、调试和脚本化工具集成 | UNIX-like reverse engineering framework and command-line toolset. | 是 · 2026-11-12 | [v0.9.1](https://github.com/rizinorg/rizin/releases/tag/v0.9.1) · 2026-06-29 | 4188 |
+| [Ghidra](https://github.com/NationalSecurityAgency/ghidra) | 反编译器 / 分析框架 | 跨平台原生二进制静态分析 | 反汇编、反编译、类型恢复、脚本与无头分析 | Ghidra is a software reverse engineering (SRE) framework | 是 · 2026-11-10 | [Ghidra_12.2_build](https://github.com/NationalSecurityAgency/ghidra/releases/tag/Ghidra_12.2_build) · 2026-10-22 | 99885 |
+| [jadx](https://github.com/skylot/jadx) | Android 反编译器 | DEX 到 Java 的代码还原 | APK/DEX 代码阅读、交叉引用、资源与 GUI/CLI 分析 | Dex to Java decompiler | 是 · 2026-11-11 | [v1.5.6](https://github.com/skylot/jadx/releases/tag/v1.5.6) · 2026-07-10 | 51797 |
+| [Apktool](https://github.com/iBotPeaches/Apktool) | APK 解包 / 重建工具 | Android 资源与 Smali 解码和重建 | Manifest、资源、Smali 检查与修改后的 APK 重建 | A tool for reverse engineering Android apk files | 是 · 2026-10-28 | [v3.0.3](https://github.com/iBotPeaches/Apktool/releases/tag/v3.0.3) · 2026-07-20 | 27189 |
+| [Frida](https://github.com/frida/frida) | 动态插桩工具包 | 跨平台运行时观测与 Hook | 应用运行时行为分析、函数追踪和自定义插桩脚本 | Main repo for hosting release binaries | 是 · 2026-11-13 | [17.26.2](https://github.com/frida/frida/releases/tag/17.26.2) · 2026-11-07 | 22773 |
+| [ILSpy](https://github.com/icsharpcode/ILSpy) | .NET 反编译器 | 托管程序集浏览与 C# 反编译 | 类型和方法检索、元数据检查、源码导出与 CLI 分析 | .NET Decompiler with support for PDB generation, ReadyToRun, Metadata (&more) - cross-platform! | 是 · 2026-11-11 | [v11.2](https://github.com/icsharpcode/ILSpy/releases/tag/v11.2) · 2026-10-27 | 27055 |
+| [radare2](https://github.com/radareorg/radare2) | CLI / 分析框架 | 终端中的跨平台二进制分析 | 反汇编、反编译、调试、脚本和自动化分析 | UNIX-like reverse engineering framework and command-line toolset | 是 · 2026-11-13 | [6.2.6](https://github.com/radareorg/radare2/releases/tag/6.2.6) · 2026-11-05 | 25418 |
+| [x64dbg](https://github.com/x64dbg/x64dbg) | Windows 调试器 | Windows 用户态动态调试 | x64/x86 程序的断点、寄存器、内存和执行追踪 | An open-source user mode debugger for Windows. Optimized for reverse engineering and malware analysis. | 是 · 2026-11-09 | [2026.05.27](https://github.com/x64dbg/x64dbg/releases/tag/2026.05.27) · 2026-05-27 | 50296 |
+| [angr](https://github.com/angr/angr) | 二进制分析 / 符号执行框架 | 程序状态与路径约束分析 | 控制流恢复、符号执行、路径探索和约束求解 | A powerful and user-friendly binary analysis platform! | 是 · 2026-11-13 | 暂无 | 9373 |
+| [mitmproxy](https://github.com/mitmproxy/mitmproxy) | HTTP/HTTPS 代理 | 可交互和脚本化的流量分析 | 请求与响应检查、修改、重放和 Python 插件 | An interactive TLS-capable intercepting HTTP proxy for penetration testers and software developers. | 是 · 2026-11-13 | [v12.3.1](https://github.com/mitmproxy/mitmproxy/releases/tag/v12.3.1) · 2026-10-25 | 46875 |
+| [Rizin](https://github.com/rizinorg/rizin) | CLI / 分析框架 | 基于 radare2 分支发展的二进制分析框架 | 反汇编、分析、调试和脚本化工具集成 | UNIX-like reverse engineering framework and command-line toolset. | 是 · 2026-11-13 | [v0.9.1](https://github.com/rizinorg/rizin/releases/tag/v0.9.1) · 2026-06-29 | 4188 |
 | [wxapkg](https://github.com/wux1an/wxapkg) | 桌面工具 | 微信小程序包解密与解包 | `.wxapkg` 扫描、解密、解包和源码结构还原 | 跨平台微信小程序反编译 GUI 工具，.wxapkg 文件扫描 + 解密 + 解包工具 | 否 · 2026-04-28 | [v2.0.0](https://github.com/wux1an/wxapkg/releases/tag/v2.0.0) · 2026-04-16 | 4380 |
 | [zhong-wechat-wmpf-debugger](https://github.com/netz888/zhong-wechat-wmpf-debugger) | 调试工具 | Windows 微信小程序 F12 调试入口 | WMPF 版本检测、CDP/DevTools 桥接和新旧运行时调试 | WeChatOpenDevTool 微信小程序强制开启开发者工具 | 否 · 2026-07-18 | [v1.3.0](https://github.com/netz888/zhong-wechat-wmpf-debugger/releases/tag/v1.3.0) · 2026-07-18 | 124 |
 
@@ -258,17 +260,14 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 
 | 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [ReArk](https://github.com/lkimuk/ReArk) | 桌面工作站 / Agent | HarmonyOS 与移动应用分析工作台 | HAP/APP/ABC、APK/AAB、IPA、原生文件与 HDC/ADB 设备分析 | An intelligent reverse engineering and AI-assisted analysis tool for HarmonyOS NEXT (HAP/APP/ABC), Android (APK/AAB), iOS (IPA), and native PE/ELF/Mach-O binaries. | 是 · 2026-10-28 | [v1.2.0](https://github.com/lkimuk/ReArk/releases/tag/v1.2.0) · 2026-10-26 | 967 |
+| [ReArk](https://github.com/lkimuk/ReArk) | 桌面工作站 / Agent | HarmonyOS 与移动应用分析工作台 | HAP/APP/ABC、APK/AAB、IPA、原生文件与 HDC/ADB 设备分析 | An intelligent reverse engineering and AI-assisted analysis tool for HarmonyOS NEXT (HAP/APP/ABC), Android (APK/AAB), iOS (IPA), and native PE/ELF/Mach-O binaries. | 是 · 2026-10-28 | [v1.2.0](https://github.com/lkimuk/ReArk/releases/tag/v1.2.0) · 2026-10-26 | 968 |
 | [DexDec](https://github.com/asLody/dexdec) | 反编译器 / MCP / 桌面工作站 | Rust 实现的 Android 反编译与 AI 接口 | APK/DEX、Java/Kotlin 输出、按需源码与 GUI 上下文共享 | Fast, accurate Android decompilation for humans and AI agents. | 是 · 2026-08-25 | [v1.0.2](https://github.com/asLody/dexdec/releases/tag/v1.0.2) · 2026-08-21 | 133 |
 | [IDAssist](https://github.com/symgraph/IDAssist) | IDA AI 插件 / MCP 客户端 | IDA 内的 Agent 与语义检索 | 多模型、ReAct、语义图谱、RAG 和外部 MCP 工具 | AI-Powered Reverse Engineering Plugin for IDA Pro | 是 · 2026-09-20 | [2.4.0](https://github.com/symgraph/IDAssist/releases/tag/2.4.0) · 2026-09-14 | 909 |
 | [Cerberus RE](https://github.com/OwenPawl/cerberus-re-skill) | Skill / CLI / MCP | Apple 二进制静态与动态证据关联 | Mach-O/ObjC/Swift/XPC、Ghidra、LLDB 和 Frida（运行时工作流需 macOS） | cerberus-re is a local Apple-focused reverse-engineering workbench for building a repeatable three-headed static/dynamic/instrumentation loop around Ghidra, LLDB, and Frida. | 是 · 2026-08-30 | 暂无 | 223 |
-| [mobile-reverse-skill](https://github.com/owen800q/mobile-reverse-skill) | Skill / 脚本 | 移动端静态与动态分析工作流 | Android Java/JNI、iOS PlayCover、运行时观测与证据记录 | 🔒 无法公开访问 | 无法公开访问 | 暂无 | — |
-| [leanrea](https://github.com/aicodeking/leanrea) | Skill | 直接调用本地 CLI 的轻量逆向方法 | Electron/JS、原生二进制、托管程序集和文件格式初查 | One 8 KB skill that replaces REA (Reverse Engineer Anything): plain CLI tools, no MCP. Benchmarked: 38% faster, 35% cheaper. | 是 · 2026-10-17 | 暂无 | 4244 |
-| [apk-reverse](https://github.com/newliver666/apk-reverse) | Skill / 脚本 | Android APK 修改与运行验证方法 | DEX 补丁、重打包、签名、动态分析和分级证据记录 | 🔒 无法公开访问 | 无法公开访问 | 暂无 | — |
+| [leanrea](https://github.com/aicodeking/leanrea) | Skill | 直接调用本地 CLI 的轻量逆向方法 | Electron/JS、原生二进制、托管程序集和文件格式初查 | One 8 KB skill that replaces REA (Reverse Engineer Anything): plain CLI tools, no MCP. Benchmarked: 38% faster, 35% cheaper. | 是 · 2026-10-17 | 暂无 | 4249 |
 | [Seep-Reverse-Lab](https://github.com/angusdevgo/Seep-Reverse-Lab) | 工作站 / MCP / Skill | 多工具逆向工作台与授权边界审计 | Android、原生程序、CTF、工具编排和调查记录 | Agent-Native multi-platform reverse engineering and CWE-602 client-side authorization audit workbench. | 是 · 2026-11-09 | [v1.15.0](https://github.com/angusdevgo/Seep-Reverse-Lab/releases/tag/v1.15.0) · 2026-11-09 | 2163 |
 | [WinDbg MCP（第三方）](https://github.com/memoryforensics1/windbg-mcp) | WinDbg / MCP | Windows 内核与用户态调试接口 | DbgEng、KDNET、TTD、Frida、远程调试和虚拟机控制 | C# MCP server for kernel & user-mode Windows debugging — DbgEng COM, KDNET, Frida, dbgsrv, TTD, and integrated VM control. 29 tools for LLM agents. | 是 · 2026-10-07 | 暂无 | 46 |
-| [jebmcp](https://github.com/flankerhqd/jebmcp) | JEB Pro 插件 / MCP | 将 JEB Pro 分析能力接入 AI 客户端 | APK 反编译、调用关系、Manifest、符号重命名和漏洞分析 | 暂无简介 | 否 · 2026-04-26 | 暂无 | 262 |
-| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra 插件 / MCP | Ghidra 与 AI 客户端连接 | 反编译、函数分析和符号整理 | MCP Server for Ghidra | 是 · 2026-10-10 | [2.0](https://github.com/LaurieWired/GhidraMCP/releases/tag/2.0) · 2026-10-10 | 11911 |
+| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP) | Ghidra 插件 / MCP | Ghidra 与 AI 客户端连接 | 反编译、函数分析和符号整理 | MCP Server for Ghidra | 是 · 2026-10-10 | [2.0](https://github.com/LaurieWired/GhidraMCP/releases/tag/2.0) · 2026-10-10 | 11916 |
 | [reverse-skill](https://github.com/715494637/reverse-skill/) | Skill | 高级 Web 逆向方法库 | JSVMP、Worker、WASM、Webpack、AST 和协议分析 | 面向 Web JS 逆向分析的技能仓库，覆盖请求链定位、运行时诊断、AST 混淆恢复、JSVMP、worker、WASM、webpack/runtime 与协议语义分析。 | 否 · 2026-04-01 | [jsr-skills-15-a3e116e](https://github.com/715494637/reverse-skill/releases/tag/jsr-skills-15-a3e116e) · 2026-05-02 | 388 |
 | [VortexDBG](https://github.com/carlosadrianosj/VortexDBG) | Android 模拟器 / MCP | 设备外联合模拟原生库与 DEX/Java | ARM `.so`、Dalvik/Java、JNI、断点、内存、寄存器和调用追踪 | Emulate Android native libraries and DEX/Java classes together, off-device, and drive them with AI through MCP. A production-grade Kotlin engine for Android reverse engineering: native .so emulation (Unicorn2, Dynarmic), Dalvik/DEX and JNI, off-device automation. 安卓逆向工程引擎：在同一处同时模拟原生库与 DEX/Java 类，脱机运行，并通过 MCP 用 AI 驱动。Kotlin 打造，面向生产。 | 否 · 2026-07-16 | 暂无 | 13 |
 | [droidsaw](https://github.com/droidsaw/droidsaw) | Android 反编译器 / MCP | DEX、Hermes 与 React Native 跨层分析 | DEX→Java、Hermes→JavaScript、跨 JS/Java 桥污点分析、SBOM 和审计 | Pure-Rust Android decompiler and security-audit suite. DEX → Java, Hermes → JavaScript. Cross-layer taint across the React Native bridge. CycloneDX SBOM + OpenVEX. CLI and MCP. Bytecode is not a security layer. | 否 · 2026-06-11 | 暂无 | 36 |
@@ -277,6 +276,15 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | [Diaphora MCP](https://github.com/xTeardx/diaphora-mcp) | IDA / Diaphora / MCP | 自动化二进制差分 | IDA 数据库导出、函数匹配、调用图变化、安全变更排序和补丁报告 | MCP server for automated binary diffing. | 是 · 2026-10-12 | [v1.1.0](https://github.com/xTeardx/diaphora-mcp/releases/tag/v1.1.0) · 2026-10-12 | 20 |
 | [Reverify](https://github.com/2akouwu/reverify) | MCP / CLI / 验证层 | AI 二进制逆向结论的确定性验证 | 字节、指令、二进制结构、行为等价、表达式证明和跨会话证据账本 | Stop your AI from making things up — it proposes, deterministic tools decide, every claim checked against ground truth with evidence. Grounded facts and context survive resets. Reverse engineering is the proving ground. MCP server + CLI. | 是 · 2026-09-07 | [v0.11.0](https://github.com/2akouwu/reverify/releases/tag/v0.11.0) · 2026-09-04 | 1341 |
 | [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp) | MCP | 微信小程序 CDP 调试工具 | 微信开发者工具、PC 微信小程序、运行时代码和请求分析 | 微信小程序逆向工程 MCP 服务器，让你的 AI 编码助手（如 Claude、Cursor、Antigravity）能够直接通过 Chrome DevTools Protocol (CDP) 调试和分析微信小程序（包括微信开发者工具或 PC 端微信小程序）中的 JavaScript 代码。 | 否 · 2026-04-22 | 暂无 | 255 |
+
+## 旧版兼容参考
+
+> 仅供旧版环境的兼容评估，具体版本支持需自行验证；新版优先使用上方列出的原厂接口。
+
+| 项目 | 形态 | 核心定位 | 适用场景 | GitHub 简介 | 最近更新 | 最新 Release | Stars |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Binary Ninja MCP](https://github.com/fosdickio/binary_ninja_mcp) | Binary Ninja 插件 / MCP | 旧版 Binary Ninja 的第三方 MCP 参考 | 旧版环境兼容评估；6.0+ 优先内置 MCP | A Binary Ninja plugin containing an MCP server that enables seamless integration with your favorite LLM/MCP client. | 否 · 2026-04-05 | [v1.2.1](https://github.com/fosdickio/binary_ninja_mcp/releases/tag/v1.2.1) · 2026-03-22 | 459 |
+| [jebmcp](https://github.com/flankerhqd/jebmcp) | JEB Pro 插件 / MCP | 旧版 JEB 的第三方 MCP 参考 | 旧版环境兼容评估；新版优先 JEB 内置 MCP | 暂无简介 | 否 · 2026-04-26 | 暂无 | 262 |
 
 ## 相关资源与验证案例
 
