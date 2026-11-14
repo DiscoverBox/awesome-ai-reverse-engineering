@@ -64,6 +64,7 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | Collect evidence and prepare for local reproduction | [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp) (source/network exports) |
 | Use an anti-detection browser environment | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp) |
 | Use AI with IDA 9.4+ in GUI or headless mode | [Hex-Rays IDA MCP](https://github.com/HexRaysSA/ida-mcp) |
+| Read and write IDA databases through live SQL | [IDASQL](https://github.com/allthingsida/idasql) (CLI / HTTP / MCP; IDA 9.2–9.5) |
 | Use third-party IDA MCP through idalib | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) (use `idalib-mcp`; prefer the official server for new setups) |
 | Export IDA data for analysis by an AI coding tool | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) |
 | Run IDA as a headless service | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) (v9.5.x targets IDA 9.5; older IDA versions need matching releases) |
@@ -136,11 +137,14 @@ The list includes MCP servers, skills, plugins for IDA Pro, Ghidra, Binary Ninja
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Hex-Rays IDA MCP](https://github.com/HexRaysSA/ida-mcp) | IDA Plugin / MCP | Vendor Code Mode and database coordination | IDAPython analysis, shared GUI/headless databases, multiple databases, and agent collaboration | Official Hex-Rays IDA MCP Server. | Yes · 2026-10-28 | [v20261028.0.3](https://github.com/HexRaysSA/ida-mcp/releases/tag/v20261028.0.3) · 2026-10-28 | 1611 |
 | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) | MCP / idalib | Direct AI access to and control of IDA Pro | Use `idalib-mcp` for decompilation, cross-references, and symbol organization; the legacy GUI plugin is no longer recommended | AI-powered reverse engineering assistant that bridges IDA Pro with language models through MCP. | Yes · 2026-11-12 | [1.4.0](https://github.com/mrexodia/ida-pro-mcp/releases/tag/1.4.0) · 2025-10-06 | 13460 |
+| [IDASQL](https://github.com/allthingsida/idasql) | IDA Plugin / CLI / HTTP / MCP | Reading and writing IDA databases through live SQL virtual tables | GUI and headless analysis, function and cross-reference queries, type recovery, renaming, and comments | Vibe Reverse Engineer with IDA Pro: An interface for IDA in SQL via live virtual tables. Don't let appearances deceive you! :) | Yes · 2026-11-12 | [v0.0.20](https://github.com/allthingsida/idasql/releases/tag/v0.0.20) · 2026-11-12 | 472 |
 | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) | IDA Plugin / Export Tool | Exporting IDA data for analysis by AI coding tools | Large-scale code indexing and analysis with low interaction overhead | Say goodbye to the complex, verbose, and laggy interaction mode of IDA Pro MCP | No · 2026-07-26 | None | 2075 |
 | [Gepetto](https://github.com/JusticeRage/Gepetto) | IDA AI Plugin | Multi-model function analysis inside IDA | Function explanations, renaming, and local or cloud model assistance | IDA plugin which queries language models to speed up reverse-engineering | Yes · 2026-08-15 | [v1.5.1](https://github.com/JusticeRage/Gepetto/releases/tag/v1.5.1) · 2025-11-19 | 3486 |
 | [WPeGPT](https://github.com/WPeace-HcH/WPeGPT) | IDA AI Plugin | Direct integration of multiple AI models into IDA | Interactive binary analysis with models such as OpenAI and DeepSeek | An IDA plugin for binary file analysis, powered by AI models such as OpenAI and DeepSeek. | No · 2026-05-27 | [v3.0](https://github.com/WPeace-HcH/WPeGPT/releases/tag/v3.0) · 2026-05-27 | 1424 |
 | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) | MCP | Headless IDA service implemented in Rust | Server deployments and automated pipelines | Headless IDA Pro MCP Server | Yes · 2026-11-01 | [v9.5.0](https://github.com/blacktop/ida-mcp-rs/releases/tag/v9.5.0) · 2026-11-01 | 904 |
 | [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp) | IDA Plugin / MCP | Managing multiple IDA instances through one endpoint | Parallel multi-binary analysis, cross-sample function similarity, and malware component correlation | Multi-instance IDA Pro MCP server — analyze multiple binaries simultaneously through a single MCP endpoint. | Yes · 2026-09-19 | None | 472 |
+
+> IDASQL requires IDA Pro 9.2–9.5 and a matching build; headless mode uses idalib, and pseudocode features require the Hex-Rays decompiler. Its SQL virtual tables operate directly on the current IDA database, with changes reflected immediately in IDA.
 
 ## Ghidra Ecosystem
 

@@ -62,6 +62,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | 证据采样与本地复现准备 | [JS Reverse MCP](https://github.com/zhizhuodemao/js-reverse-mcp)（源码/网络导出） |
 | 反检测浏览器环境                        | [Camoufox MCP Server](https://github.com/whit3rabbit/camoufox-mcp)               |
 | IDA 9.4+ 的 GUI 与无头 AI 分析       | [Hex-Rays IDA MCP](https://github.com/HexRaysSA/ida-mcp)                     |
+| 通过 SQL 实时读写 IDA 数据库 | [IDASQL](https://github.com/allthingsida/idasql)（CLI / HTTP / MCP；IDA 9.2–9.5） |
 | 通过 idalib 使用第三方 IDA MCP | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp)（使用 `idalib-mcp`；新环境优先官方实现） |
 | IDA 文件导出后交给 AI 分析               | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP)                        |
 | 无头 IDA 服务 | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs)（v9.5.x 对应 IDA 9.5；旧版 IDA 需匹配版本） |
@@ -134,11 +135,14 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Hex-Rays IDA MCP](https://github.com/HexRaysSA/ida-mcp) | IDA 插件 / MCP | 原厂 Code Mode 与数据库协调接口 | IDAPython 分析、GUI 与无头共享数据库、多数据库和多 Agent 协作 | Official Hex-Rays IDA MCP Server. | 是 · 2026-10-28 | [v20261028.0.3](https://github.com/HexRaysSA/ida-mcp/releases/tag/v20261028.0.3) · 2026-10-28 | 1611 |
 | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp) | MCP / idalib | AI 直接读取和操作 IDA Pro | 使用 `idalib-mcp` 进行反编译、交叉引用与符号整理；旧 GUI 插件不再推荐 | AI-powered reverse engineering assistant that bridges IDA Pro with language models through MCP. | 是 · 2026-11-12 | [1.4.0](https://github.com/mrexodia/ida-pro-mcp/releases/tag/1.4.0) · 2025-10-06 | 13460 |
+| [IDASQL](https://github.com/allthingsida/idasql) | IDA 插件 / CLI / HTTP / MCP | 通过实时 SQL 虚拟表读写 IDA 数据库 | GUI 与无头分析、函数与交叉引用查询、类型恢复、重命名和注释 | Vibe Reverse Engineer with IDA Pro: An interface for IDA in SQL via live virtual tables. Don't let appearances deceive you! :) | 是 · 2026-11-12 | [v0.0.20](https://github.com/allthingsida/idasql/releases/tag/v0.0.20) · 2026-11-12 | 472 |
 | [IDA-NO-MCP](https://github.com/P4nda0s/IDA-NO-MCP) | IDA 插件 / 导出工具 | 将 IDA 数据导出后交给 AI IDE 分析 | 大规模代码索引、低交互成本分析 | Say goodbye to the complex, verbose, and laggy interaction mode of IDA Pro MCP | 否 · 2026-07-26 | 暂无 | 2075 |
 | [Gepetto](https://github.com/JusticeRage/Gepetto) | IDA AI 插件 | IDA 内多模型函数分析 | 函数解释、重命名与本地或云端模型辅助 | IDA plugin which queries language models to speed up reverse-engineering | 是 · 2026-08-15 | [v1.5.1](https://github.com/JusticeRage/Gepetto/releases/tag/v1.5.1) · 2025-11-19 | 3486 |
 | [WPeGPT](https://github.com/WPeace-HcH/WPeGPT) | IDA AI 插件 | 将多种 AI 模型直接嵌入 IDA | 使用 OpenAI、DeepSeek 等模型进行交互式二进制分析 | An IDA plugin for binary file analysis, powered by AI models such as OpenAI and DeepSeek. | 否 · 2026-05-27 | [v3.0](https://github.com/WPeace-HcH/WPeGPT/releases/tag/v3.0) · 2026-05-27 | 1424 |
 | [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs) | MCP | Rust 实现的无头 IDA 服务 | 服务端部署、自动化流水线 | Headless IDA Pro MCP Server | 是 · 2026-11-01 | [v9.5.0](https://github.com/blacktop/ida-mcp-rs/releases/tag/v9.5.0) · 2026-11-01 | 904 |
 | [ida-multi-mcp](https://github.com/MeroZemory/ida-multi-mcp) | IDA 插件 / MCP | 通过单个端点管理多个 IDA 实例 | 多二进制并行分析、跨样本函数相似性搜索和恶意软件组件关联 | Multi-instance IDA Pro MCP server — analyze multiple binaries simultaneously through a single MCP endpoint. | 是 · 2026-09-19 | 暂无 | 472 |
+
+> IDASQL 需 IDA Pro 9.2–9.5 及对应版本的构建；无头模式使用 idalib，伪代码功能需 Hex-Rays 反编译器。SQL 虚拟表直接操作当前 IDA 数据库，修改会立即反映在 IDA 中。
 
 ## Ghidra 生态
 
