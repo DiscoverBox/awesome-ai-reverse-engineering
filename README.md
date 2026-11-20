@@ -280,6 +280,7 @@ Awesome AI Reverse Engineering 收集 AI 辅助逆向工具，覆盖 JavaScript 
 | [Diaphora MCP](https://github.com/xTeardx/diaphora-mcp) | IDA / Diaphora / MCP | 自动化二进制差分 | IDA 数据库导出、函数匹配、调用图变化、安全变更排序和补丁报告 | MCP server for automated binary diffing. | 是 · 2026-10-12 | [v1.1.0](https://github.com/xTeardx/diaphora-mcp/releases/tag/v1.1.0) · 2026-10-12 | 20 |
 | [Reverify](https://github.com/2akouwu/reverify) | MCP / CLI / 验证层 | AI 二进制逆向结论的确定性验证 | 字节、指令、二进制结构、行为等价、表达式证明和跨会话证据账本 | Stop your AI from making things up — it proposes, deterministic tools decide, every claim checked against ground truth with evidence. Grounded facts and context survive resets. Reverse engineering is the proving ground. MCP server + CLI. | 是 · 2026-09-07 | [v0.11.0](https://github.com/2akouwu/reverify/releases/tag/v0.11.0) · 2026-09-04 | 1347 |
 | [MiniApp CDP MCP](https://github.com/zhizhuodemao/miniapp-cdp-mcp) | MCP | 微信小程序 CDP 调试工具 | 微信开发者工具、PC 微信小程序、运行时代码和请求分析 | 微信小程序逆向工程 MCP 服务器，让你的 AI 编码助手（如 Claude、Cursor、Antigravity）能够直接通过 Chrome DevTools Protocol (CDP) 调试和分析微信小程序（包括微信开发者工具或 PC 端微信小程序）中的 JavaScript 代码。 | 否 · 2026-04-22 | 暂无 | 264 |
+| [usb-rea](https://github.com/emirmrkaljevic/usb-rea) | MCP / CLI | 从 USB 抓包推断设备协议并生成驱动 | 只有 Windows 厂商软件的 USB 设备（机箱屏幕、RGB、水冷、鼠标）的互操作性逆向：usbmon/USBPcap 抓包、带标签的操作、协议报告与 pyusb 驱动 | Reverse Engineer any USB gadget: capture vendor-app traffic, infer the protocol with evidence, generate an open Python/libusb driver. CLI + MCP server. | 是 · 2026-11-20 | [v0.7.14](https://github.com/emirmrkaljevic/usb-rea/releases/tag/v0.7.14) · 2026-11-12 | 151 |
 
 ## 旧版兼容参考
 
